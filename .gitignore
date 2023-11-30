@@ -6,3 +6,8 @@ Lib/
 Include/
 .env
 pyvenv.cfg
+bin/
+lib64/
+lib64
+lib/
+*.egg-info/
