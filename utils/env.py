@@ -1,8 +1,6 @@
-def get_env(envName: str) -> str:
-    import os
-    env = os.getenv(envName)
+import databases
+from starlette.config import Config
 
-    if env is None:
-        raise Exception(f'Environment variable {envName} is not set.')
+config = Config(".env")
 
-    return env
+[DB_CONNECTION] = config("DB_CONNECTION", cast=databases.DatabaseURL),

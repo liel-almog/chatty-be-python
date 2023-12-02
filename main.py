@@ -1,6 +1,5 @@
 import asyncio
 from server import server
-from dotenv import load_dotenv
 
 async def app(scope, receive, send):
     await server.app(scope, receive, send)
