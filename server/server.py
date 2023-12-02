@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from database.db import get_db
 from controllers import api_router
 import uvicorn
 
