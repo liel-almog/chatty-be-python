@@ -1,13 +1,16 @@
 from typing import Annotated
+from databases import Database
 from fastapi import Depends
-from repository.room_repository import RoomRepository, get_room_repository
+from database.db import get_db
 
-class RoomService():
-    def __init__(self, room_repo: RoomRepository):
-        self.room_repo: RoomRepository = room_repo
+
+class RoomService:
+    def __init__(self, db: Database):
+        self.db = db
 
     async def get_all(self):
-        return await self.room_repo.find_all()
+        return await self.db.fetch_all("SELECT * FROM public.rooms")
 
-def get_room_service(room_repo: Annotated[RoomRepository, Depends(get_room_repository)]):
-    return RoomService(room_repo)
+
+def get_room_service(db: Annotated[Database, Depends(get_db)]):
+    return RoomService(db)

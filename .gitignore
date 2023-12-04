@@ -11,3 +11,4 @@ lib64/
 lib64
 lib/
 *.egg-info/
+include/
