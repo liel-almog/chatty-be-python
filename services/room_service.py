@@ -9,7 +9,7 @@ class RoomService:
         self.db = db
 
     async def get_all(self):
-        return await self.db.fetch_all("SELECT * FROM public.rooms")
+        return await self.db.fetch_all("SELECT id, name FROM public.rooms")
 
 
 def get_room_service(db: Annotated[Database, Depends(get_db)]):
