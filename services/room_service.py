@@ -1,7 +1,6 @@
-from typing import Annotated
 from databases import Database
-from fastapi import Depends
-from database.db import get_db
+
+from database.db import CommonDB
 
 
 class RoomService:
@@ -9,8 +8,14 @@ class RoomService:
         self.db = db
 
     async def get_all(self):
-        return await self.db.fetch_all("SELECT id, name FROM public.rooms")
+        return await self.db.fetch_all("SELECT id, name, created_at FROM public.rooms")
+
+    async def get_one(self, room_id: int):
+        return await self.db.fetch_one(
+            "SELECT id, name, created_at FROM public.rooms WHERE id = :id",
+            values={"id": room_id},
+        )
 
 
-def get_room_service(db: Annotated[Database, Depends(get_db)]):
+def get_room_service(db: CommonDB):
     return RoomService(db)
