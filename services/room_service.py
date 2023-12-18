@@ -1,4 +1,6 @@
+from typing import Annotated
 from databases import Database
+from fastapi import Depends
 
 from database.db import CommonDB
 
@@ -19,3 +21,5 @@ class RoomService:
 
 def get_room_service(db: CommonDB):
     return RoomService(db)
+
+CommonRoomService = Annotated[RoomService, Depends(get_room_service, use_cache=True)]
