@@ -1,9 +1,9 @@
-from typing import Annotated
-from fastapi import APIRouter, Depends, HTTPException
-from services.room_service import CommonRoomService
-from services.message_service import CommonMessageService
-from models.room_model import RoomModel
+from fastapi import APIRouter, HTTPException
+
 from models.message_model import MessageModel
+from models.room_model import RoomModel
+from services.message_service import CommonMessageService
+from services.room_service import CommonRoomService
 
 router = APIRouter()
 
@@ -24,5 +24,3 @@ async def get_all_messages_by_room_id(
         raise HTTPException(status_code=404, detail="Room not found")
 
     return await message_service.get_all_by_room(room_id)
-
-
